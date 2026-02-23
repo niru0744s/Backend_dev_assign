@@ -1,6 +1,5 @@
 const User = require("../models/UserSchema");
 
-// Bulk insertion of users
 const bulkInsertUsers = async (req, res) => {
     try {
         const usersData = req.body;
@@ -15,7 +14,7 @@ const bulkInsertUsers = async (req, res) => {
             success: true,
             message: `Successfully inserted ${result.length} users.`,
             insertedCount: result.length,
-            userData:result
+            userData: result
         });
     } catch (error) {
         console.error("Error in bulkInsertUsers:", error);
@@ -41,7 +40,6 @@ const bulkUpdateUsers = async (req, res) => {
         }
 
         const bulkOps = usersData.map(user => {
-            // Using `phone` as the unique identifier for updating if `_id` is not present
             const filter = user._id ? { _id: user._id } : { phone: user.phone };
 
             const { _id, phone, ...updateFields } = user;
